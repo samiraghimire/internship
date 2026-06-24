@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediCare Clinic Management System</title>
+
+<style>
+
+/* =========================
+   GLOBAL CSS
+========================= */
+
+:root{
+--navy:#0F2D52;
+--teal:#13B5C8;
+--white:#fff;
+--gray:#F5F7FA;
+--green:#28A745;
+--orange:#F39C12;
+--text:#333;
+--shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+background:var(--gray);
+color:var(--text);
+line-height:1.6;
+}
+
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+
+.btn{
+display:inline-block;
+padding:12px 25px;
+background:var(--teal);
+color:white;
+border-radius:8px;
+border:none;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+background:var(--navy);
+}
+
+
+
+/* =========================
+HEADER
+========================= */
+
+
+header{
+background:var(--white);
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:var(--shadow);
+}
+
+
+.nav{
+height:75px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+
+.logo{
+font-size:25px;
+font-weight:bold;
+color:var(--navy);
+}
+
+
+.logo span{
+color:var(--teal);
+}
+
+
+.menu{
+display:flex;
+gap:20px;
+}
+
+
+.menu a{
+font-weight:600;
+}
+
+
+.menu a:hover{
+color:var(--teal);
+}
+
+
+#menu{
+display:none;
+}
+
+
+.menu-btn{
+display:none;
+font-size:30px;
+}
+
+
+/* =========================
+HERO
+========================= */
+
+
+.hero{
+padding:90px 0;
+background:
+linear-gradient(
+rgba(15,45,82,.9),
+rgba(19,181,200,.8)
+),
+url("https://images.unsplash.com/photo-1584982751601-97dcc096659c")
+center/cover;
+color:white;
+}
+
+
+.hero h1{
+font-size:50px;
+}
+
+
+.hero p{
+margin:20px 0;
+max-width:600px;
+}
+
+
+
+/* =========================
+CARDS
+========================= */
+
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin:40px 0;
+}
+
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:var(--shadow);
+transition:.3s;
+}
+
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+
+.card h3{
+color:var(--navy);
+}
+
+
+
+/* =========================
+STATISTICS
+========================= */
+
+
+.stat{
+font-size:35px;
+font-weight:bold;
+color:var(--teal);
+}
+
+
+
+/* =========================
+TABLE
+========================= */
+
+
+.table-box{
+background:white;
+padding:20px;
+border-radius:15px;
+overflow:auto;
+box-shadow:var(--shadow);
+}
+
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+
+th{
+background:var(--navy);
+color:white;
+}
+
+
+td,th{
+padding:15px;
+border-bottom:1px solid #ddd;
+}
+
+
+.badge{
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+color:white;
+}
+
+
+.success{
+background:var(--green);
+}
+
+
+.warning{
+background:var(--orange);
+}
+
+
+
+input,select,textarea{
+
+width:100%;
+padding:14px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+
+}
+
+
+form{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:var(--shadow);
+}
+
+
+section{
+padding:60px 0;
+}
+
+
+.title{
+text-align:center;
+margin-bottom:30px;
+color:var(--navy);
+}
+
+
+
+
+/* =========================
+FOOTER
+========================= */
+
+
+footer{
+background:var(--navy);
+color:white;
+padding:40px 0;
+}
+
+
+footer .grid{
+margin:0;
+}
+
+
+
+.social{
+display:flex;
+gap:15px;
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+
+@media(max-width:768px){
+
+
+.menu{
+
+position:absolute;
+top:75px;
+left:0;
+width:100%;
+background:white;
+display:none;
+flex-direction:column;
+padding:20px;
+
+}
+
+
+#menu:checked + .menu-btn + .menu{
+
+display:flex;
+
+}
+
+
+.menu-btn{
+display:block;
+}
+
+
+.hero h1{
+font-size:35px;
+}
+
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="container nav">
+
+<div class="logo">
+Medi<span>Care</span>
+</div>
+
+
+<input type="checkbox" id="menu">
+
+<label class="menu-btn" for="menu">
+☰
+</label>
+
+
+<nav class="menu">
+
+<a href="#home">Home</a>
+<a href="#dashboard">Dashboard</a>
+<a href="#patients">Patients</a>
+<a href="#doctors">Doctors</a>
+<a href="#appointments">Appointments</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+
+<!-- HOME -->
+
+
+<section class="hero" id="home">
+
+<div class="container">
+
+<h1>
+Modern Clinic Management System
+</h1>
+
+
+<p>
+Manage patients, doctors, appointments,
+medical records and billing from one professional healthcare dashboard.
+</p>
+
+
+<a class="btn">
+Get Started
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="container">
+
+
+<h2 class="title">
+Clinic Overview
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+<h3>Total Patients</h3>
+<div class="stat">2500+</div>
+</div>
+
+
+<div class="card">
+<h3>Doctors</h3>
+<div class="stat">120</div>
+</div>
+
+
+
+<div class="card">
+<h3>Appointments</h3>
+<div class="stat">450</div>
+</div>
+
+
+
+<div class="card">
+<h3>Revenue</h3>
+<div class="stat">$80K</div>
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- SERVICES -->
+
+
+<section>
+
+<div class="container">
+
+<h2 class="title">
+Featured Services
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+<h3>Cardiology</h3>
+<p>Heart care and diagnosis services.</p>
+</div>
+
+
+<div class="card">
+<h3>Neurology</h3>
+<p>Advanced brain treatment.</p>
+</div>
+
+
+<div class="card">
+<h3>Laboratory</h3>
+<p>Medical testing and reports.</p>
+</div>
+
+
+<div class="card">
+<h3>Pharmacy</h3>
+<p>Medicine management.</p>
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- DOCTORS -->
+
+
+<section>
+
+<div class="container">
+
+<h2 class="title">
+Doctors Preview
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+Dr. John Smith
+</h3>
+
+<p>
+Cardiologist
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Dr. Sarah Lee
+</h3>
+
+<p>
+Neurologist
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Dr. David Roy
+</h3>
+
+<p>
+Pediatrician
+</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- DASHBOARD -->
+
+
+<section id="dashboard">
+
+
+<div class="container">
+
+<h2 class="title">
+Dashboard
+</h2>
+
+
+
+<div class="grid">
+
+
+<div class="card">
+<h3>Total Patients</h3>
+<h1>5000</h1>
+</div>
+
+
+<div class="card">
+<h3>Total Doctors</h3>
+<h1>250</h1>
+</div>
+
+
+<div class="card">
+<h3>Today Appointment</h3>
+<h1>120</h1>
+</div>
+
+
+<div class="card">
+<h3>Revenue</h3>
+<h1>$20K</h1>
+</div>
+
+
+</div>
+
+</div>
+
+</section>
